@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "What is a Dataframe?",
+    "section": "",
+    "text": "A data frame is a table where each row is one observation and each column is one variable, designed so you can ask and answer questions with code."
+  },
+  {
+    "objectID": "index.html#the-idea-in-one-sentence",
+    "href": "index.html#the-idea-in-one-sentence",
+    "title": "What is a Dataframe?",
+    "section": "",
+    "text": "A data frame is a table where each row is one observation and each column is one variable, designed so you can ask and answer questions with code."
+  },
+  {
+    "objectID": "index.html#why-data-frames-matter",
+    "href": "index.html#why-data-frames-matter",
+    "title": "What is a Dataframe?",
+    "section": "Why data frames matter",
+    "text": "Why data frames matter\nMost analysis tasks become easier when your data is in a consistent table:\n\nYou can filter (keep certain rows)\nYou can select (keep certain columns)\nYou can summarize (compute counts, averages, percentages)\nYou can group (compare subgroups fairly)\n\nIn other words: clean data frames turn “I wonder…” into “I can test that.”"
+  },
+  {
+    "objectID": "index.html#a-tiny-example",
+    "href": "index.html#a-tiny-example",
+    "title": "What is a Dataframe?",
+    "section": "A tiny example",
+    "text": "A tiny example\nBelow is a simple data frame that looks like exam/course data.\nlibrary(dplyr)\n\ndf &lt;- tibble::tibble( student_id = c(101, 102, 103, 104, 105, 106), term = c(\"Fall\", \"Fall\", \"Fall\", \"Spring\", \"Spring\", \"Spring\"), course = c(\"MSK I\", \"MSK I\", \"Neuro I\", \"MSK I\", \"Neuro I\", \"Neuro I\"), final_grade = c(92, 68, 85, 74, 88, 61) )\n\ndf"
+  },
+  {
+    "objectID": "index.html#how-to-think-about-the-structure",
+    "href": "index.html#how-to-think-about-the-structure",
+    "title": "What is a Dataframe?",
+    "section": "How to think about the structure",
+    "text": "How to think about the structure\nRows: “What is one row?”\nIn this example, one row is one student in one course in one term.\nThat choice matters: it determines what questions you can answer cleanly.\nColumns: “What is one column?”\nEach column should represent one concept:\n\nstudent_id identifies who\nterm describes when\ncourse describes what\nfinal_grade is the outcome we care about"
+  },
+  {
+    "objectID": "index.html#questions-you-can-answer-and-the-code-patterns",
+    "href": "index.html#questions-you-can-answer-and-the-code-patterns",
+    "title": "What is a Dataframe?",
+    "section": "Questions you can answer (and the code patterns)",
+    "text": "Questions you can answer (and the code patterns)\n1) How many rows are in the dataset?\nnrow(df)\n2) What are the column names?\nnames(df)\n3) What is the average final grade overall?\ndf %&gt;%\n  summarize(avg_grade = mean(final_grade))\n4) What is the average grade by course?\ndf %&gt;%\n  group_by(course) %&gt;%\n  summarize(\n    n = n(),\n    avg_grade = mean(final_grade)\n  )\n5) Which students are below 70?\ndf %&gt;%\n  filter(final_grade &lt; 70)"
+  },
+  {
+    "objectID": "index.html#a-simple-data-frame-checklist",
+    "href": "index.html#a-simple-data-frame-checklist",
+    "title": "What is a Dataframe?",
+    "section": "A simple “data frame checklist”",
+    "text": "A simple “data frame checklist”\nBefore analyzing, ask:\n\nIs one row one thing? (one student-course-term? one exam attempt? one clinic visit?)\nAre columns variables, not sentences?\nAre values consistent? (e.g., Fall vs fall vs FA)\nDo you have an ID? (student, course, exam, location, etc.)\nAre missing values handled intentionally?"
+  },
+  {
+    "objectID": "index.html#takeaway",
+    "href": "index.html#takeaway",
+    "title": "What is a Dataframe?",
+    "section": "Takeaway",
+    "text": "Takeaway\nA good data frame is less about “formatting” and more about making your questions computable.\n\nIf you choose the right row definition and consistent columns, your analysis becomes a set of repeatable steps."
+  }
+]

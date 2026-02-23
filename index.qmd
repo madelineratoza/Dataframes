@@ -1,0 +1,116 @@
+---
+title: "What is a Dataframe?"
+Output: HTML
+Save as: index.qmd
+theme: darkly
+---
+
+## The idea in one sentence
+
+A **data frame** is a table where **each row is one observation** and **each column is one variable**, designed so you can ask and answer questions with code.
+
+------------------------------------------------------------------------
+
+## Why data frames matter
+
+Most analysis tasks become easier when your data is in a consistent table:
+
+-   You can **filter** (keep certain rows)
+-   You can **select** (keep certain columns)
+-   You can **summarize** (compute counts, averages, percentages)
+-   You can **group** (compare subgroups fairly)
+
+In other words: clean data frames turn “I wonder…” into “I can test that.”
+
+------------------------------------------------------------------------
+
+## A tiny example
+
+Below is a simple data frame that looks like exam/course data.
+
+``` R
+library(dplyr)
+
+df <- tibble::tibble( student_id = c(101, 102, 103, 104, 105, 106), term = c("Fall", "Fall", "Fall", "Spring", "Spring", "Spring"), course = c("MSK I", "MSK I", "Neuro I", "MSK I", "Neuro I", "Neuro I"), final_grade = c(92, 68, 85, 74, 88, 61) )
+
+df
+```
+
+## How to think about the structure
+
+**Rows: “What is one row?”**
+
+In this example, one row is **one student in one course in one term**.
+
+That choice matters: it determines what questions you can answer cleanly.
+
+**Columns: “What is one column?”**
+
+Each column should represent **one concept**:
+
+-   `student_id` identifies who
+
+-   `term` describes when
+
+-   `course` describes what
+
+-   `final_grade` is the outcome we care about
+
+## Questions you can answer (and the code patterns)
+
+1\) How many rows are in the dataset?
+
+``` R
+nrow(df)
+```
+
+2\) What are the column names?
+
+``` R
+names(df)
+```
+
+3\) What is the average final grade overall?
+
+``` R
+df %>%
+  summarize(avg_grade = mean(final_grade))
+```
+
+4\) What is the average grade by course?
+
+``` R
+df %>%
+  group_by(course) %>%
+  summarize(
+    n = n(),
+    avg_grade = mean(final_grade)
+  )
+```
+
+5\) Which students are below 70?
+
+``` R
+df %>%
+  filter(final_grade < 70)
+```
+
+## A simple “data frame checklist”
+
+Before analyzing, ask:
+
+1.  **Is one row one thing?** (one student-course-term? one exam attempt? one clinic visit?)
+
+2.  **Are columns variables, not sentences?**
+
+3.  **Are values consistent?** (e.g., `Fall` vs `fall` vs `FA`)
+
+4.  **Do you have an ID?** (student, course, exam, location, etc.)
+
+5.  **Are missing values handled intentionally?**
+
+## Takeaway
+
+A good data frame is less about “formatting” and more about **making your questions computable**.\
+
+If you choose the right row definition and consistent columns, your analysis becomes a set of repeatable steps.

@@ -1,0 +1,10 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Data Frame Module"
+
+format:
+  html:
+    toc: true
